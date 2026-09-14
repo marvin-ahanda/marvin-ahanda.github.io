@@ -1,0 +1,76 @@
+# =============================================================================
+# Marvin Ahanda — portfolio
+# Site statique sans build : Netlify sert le dossier tel quel.
+# =============================================================================
+
+[build]
+  publish = "."
+  command = ""
+
+# --- En-têtes globaux : sécurité + politique de confidentialité ---------------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=(), usb=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+# --- HTML : jamais mis en cache, pour que toute mise à jour soit immédiate ----
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# --- Piste audio : 1,6 Mo, immuable elle aussi -------------------------------
+[[headers]]
+  for = "/audio/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# --- CSS / JS / images : révalidation quotidienne ----------------------------
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+
+# --- Polices : elles ne changeront jamais, cache maximal ---------------------
+[[headers]]
+  for = "/assets/*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Access-Control-Allow-Origin = "*"
+
+# --- URL canonique : /index.html renvoie sur / (une seule URL indexée) -------
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/index"
+  to = "/"
+  status = 301
+
+# --- Anciennes ancres du portfolio précédent --------------------------------
+[[redirects]]
+  from = "/profil"
+  to = "/#apropos"
+  status = 301
+
+[[redirects]]
+  from = "/projets"
+  to = "/#systemes"
+  status = 301
+
+[[redirects]]
+  from = "/contact"
+  to = "/#contact"
+  status = 301

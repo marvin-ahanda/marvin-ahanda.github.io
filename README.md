@@ -1,7 +1,7 @@
 # Marvin Ahanda — Portfolio
 
 Portfolio d'ingénieur agents IA & automatisation.
-**En ligne : https://marvin-ahanda.github.io**
+**En ligne : https://marvinahanda.netlify.app**
 
 > Je conçois, déploie et maintiens des systèmes multi-agents en production —
 > agents WhatsApp et vocaux, workflows n8n, architectures multi-agents.
@@ -52,6 +52,7 @@ Site statique, sans framework et sans dépendance CDN : un seul fichier CSS écr
 │   ├── inter-latin-*.woff2
 │   └── photo-*.jpg  og-image.png  favicon.svg
 ├── audio/ambient.mp3       Boucle 40 mesures à 70 BPM, -16 LUFS
+├── netlify.toml            En-têtes, cache, redirections
 ├── robots.txt  sitemap.xml  .nojekyll
 ```
 
@@ -64,7 +65,9 @@ python3 -m http.server 8000
 # puis http://localhost:8000
 ```
 
-Le déploiement est automatique : tout commit sur `main` est publié par GitHub Pages.
+**Hébergement** : Netlify (production, https://marvinahanda.netlify.app).
+Ce dépôt GitHub reste la source de vérité du code ; la configuration Netlify
+(en-têtes, cache, redirections) est versionnée dans `netlify.toml`.
 
 ## Contact
 

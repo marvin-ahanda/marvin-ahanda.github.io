@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /audio/
 
-Sitemap: https://marvin-ahanda.github.io/sitemap.xml
+Sitemap: https://marvinahanda.netlify.app/sitemap.xml
