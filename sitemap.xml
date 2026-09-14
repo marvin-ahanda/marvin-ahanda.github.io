@@ -2,12 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://marvinahanda.netlify.app/</loc>
+    <loc>https://portfolio.nexiaacademy.net/</loc>
     <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://marvinahanda.netlify.app/assets/og-image.png</image:loc>
+      <image:loc>https://portfolio.nexiaacademy.net/assets/og-image.png</image:loc>
       <image:title>Marvin Ahanda - Ingenieur Agents IA et Automatisation</image:title>
     </image:image>
   </url>

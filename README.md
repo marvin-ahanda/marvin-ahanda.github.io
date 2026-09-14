@@ -1,7 +1,7 @@
 # Marvin Ahanda — Portfolio
 
 Portfolio d'ingénieur agents IA & automatisation.
-**En ligne : https://marvinahanda.netlify.app**
+**En ligne : https://portfolio.nexiaacademy.net**
 
 > Je conçois, déploie et maintiens des systèmes multi-agents en production —
 > agents WhatsApp et vocaux, workflows n8n, architectures multi-agents.
@@ -65,7 +65,7 @@ python3 -m http.server 8000
 # puis http://localhost:8000
 ```
 
-**Hébergement** : Netlify (production, https://marvinahanda.netlify.app).
+**Hébergement** : Netlify (production, https://portfolio.nexiaacademy.net).
 Ce dépôt GitHub reste la source de vérité du code ; la configuration Netlify
 (en-têtes, cache, redirections) est versionnée dans `netlify.toml`.
 

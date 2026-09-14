@@ -47,6 +47,23 @@
     Cache-Control = "public, max-age=31536000, immutable"
     Access-Control-Allow-Origin = "*"
 
+# --- Une seule adresse publique -----------------------------------------------
+# Le sous-domaine netlify.app renvoie définitivement vers le domaine de marque :
+# Google n'a plus deux adresses identiques à départager.
+# Exception placée AVANT (première règle qui correspond l'emporte) : le fichier
+# de validation Google Search Console doit rester servi sur les deux hôtes.
+[[redirects]]
+  from = "/google784d3e108026f348.html"
+  to = "/google784d3e108026f348.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "https://marvinahanda.netlify.app/*"
+  to = "https://portfolio.nexiaacademy.net/:splat"
+  status = 301
+  force = true
+
 # --- URL canonique : /index.html renvoie sur / (une seule URL indexée) -------
 [[redirects]]
   from = "/index.html"

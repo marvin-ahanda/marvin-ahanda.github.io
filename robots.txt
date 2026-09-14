@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /audio/
 
-Sitemap: https://marvinahanda.netlify.app/sitemap.xml
+Sitemap: https://portfolio.nexiaacademy.net/sitemap.xml
