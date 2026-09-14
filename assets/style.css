@@ -1,0 +1,1860 @@
+/* =============================================================================
+   MARVIN AHANDA — Ingénieur Agents IA & Automatisation
+   Design system + styles. CSS écrit à la main (pas de Tailwind CDN) pour tenir
+   les objectifs Lighthouse : un seul fichier CSS, pas de runtime JS de styling.
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   0. TYPOGRAPHIE AUTO-HÉBERGÉE (Inter)
+   Self-hosting plutôt que Google Fonts : une requête tierce de moins, aucun
+   blocage de rendu, et le site reste entièrement autonome.
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("inter-latin-400-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("inter-latin-500-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("inter-latin-600-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("inter-latin-700-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("inter-latin-800-normal.woff2") format("woff2");
+}
+
+/* -----------------------------------------------------------------------------
+   1. TOKENS
+   -------------------------------------------------------------------------- */
+:root {
+  /* Palette identité */
+  --navy: #1b2a4a;
+  --navy-deep: #142138;
+  --electric: #2b4bff;
+  --ink: #2e3542;
+  --grey: #6b7280;
+  --surface: #eef1f8;
+  --white: #ffffff;
+
+  /* Dérivés */
+  --electric-tint: #eaeeff;
+  --navy-border: rgba(255, 255, 255, 0.12);
+  --line: #e2e7f2;
+
+  /* Typographie */
+  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+
+  /* Rythme */
+  --section-y: clamp(4.5rem, 9vw, 8rem);
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --maxw: 1200px;
+  --radius: 14px;
+  --radius-lg: 20px;
+
+  /* Ombres */
+  --shadow-sm: 0 1px 2px rgba(27, 42, 74, 0.06),
+    0 4px 12px rgba(27, 42, 74, 0.06);
+  --shadow-md: 0 2px 4px rgba(27, 42, 74, 0.06),
+    0 12px 32px rgba(27, 42, 74, 0.1);
+  --shadow-badge: 0 1px 2px rgba(10, 18, 35, 0.14),
+    0 8px 20px rgba(10, 18, 35, 0.18);
+}
+
+/* -----------------------------------------------------------------------------
+   2. RESET
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 3px solid var(--electric);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 200;
+  padding: 0.75rem 1.25rem;
+  background: var(--electric);
+  color: var(--white);
+  font-weight: 600;
+  border-radius: 0 0 8px 8px;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* -----------------------------------------------------------------------------
+   3. LAYOUT
+   -------------------------------------------------------------------------- */
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--section-y);
+  position: relative;
+}
+
+.section--navy {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.section--surface {
+  background: var(--surface);
+}
+
+.section__head {
+  max-width: 46rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--electric);
+  margin-bottom: 1rem;
+}
+
+.section--navy .eyebrow {
+  color: #8fa3ff;
+}
+
+/* -----------------------------------------------------------------------------
+   4. TYPOGRAPHIE
+   -------------------------------------------------------------------------- */
+.h1 {
+  font-size: clamp(2.15rem, 5.6vw, 4rem);
+  line-height: 1.06;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+.h2 {
+  font-size: clamp(1.75rem, 3.6vw, 2.75rem);
+  line-height: 1.12;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--navy);
+}
+
+.section--navy .h2 {
+  color: var(--white);
+}
+
+.h3 {
+  font-size: clamp(1.15rem, 1.8vw, 1.375rem);
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--navy);
+}
+
+.section--navy .h3 {
+  color: var(--white);
+}
+
+.lead {
+  font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--grey);
+}
+
+.section--navy .lead {
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.muted {
+  color: var(--grey);
+}
+
+.section--navy .muted {
+  color: rgba(255, 255, 255, 0.66);
+}
+
+/* -----------------------------------------------------------------------------
+   5. BOUTONS
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 52px;
+  padding: 0.875rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  transition: background-color 0.22s ease, color 0.22s ease,
+    transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+  will-change: transform;
+}
+
+.btn--primary {
+  background: var(--electric);
+  color: var(--white);
+  box-shadow: 0 6px 20px rgba(43, 75, 255, 0.35);
+}
+
+.btn--primary:hover {
+  background: #1d3bf0;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(43, 75, 255, 0.45);
+}
+
+.btn--ghost {
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  color: var(--white);
+  /* Opaque pour la même raison que .hero__proof : lisibilité garantie
+     même si un badge blanc vient se caler derrière. */
+  background: rgba(20, 33, 56, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.btn--outline {
+  border: 1.5px solid var(--line);
+  color: var(--navy);
+  background: var(--white);
+}
+
+.btn--outline:hover {
+  border-color: var(--electric);
+  color: var(--electric);
+  transform: translateY(-2px);
+}
+
+.btn__arrow {
+  flex: none;
+  transition: transform 0.22s ease;
+}
+
+.btn:hover .btn__arrow {
+  transform: translate(2px, -2px);
+}
+
+/* -----------------------------------------------------------------------------
+   6. NAV
+   -------------------------------------------------------------------------- */
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  padding-block: 0.875rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease,
+    backdrop-filter 0.3s ease;
+}
+
+.nav.is-stuck {
+  background: rgba(27, 42, 74, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.nav__brand {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.625rem;
+  color: var(--white);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: 0.9375rem;
+}
+
+/* Bulle photo : ring blanc discret + halo électrique au survol */
+.nav__avatar {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 22%;
+  background: var(--surface);
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 0 1px rgba(27, 42, 74, 0.35), 0 6px 16px rgba(10, 18, 35, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.nav__brand:hover .nav__avatar {
+  transform: scale(1.06);
+  box-shadow: 0 0 0 3px rgba(43, 75, 255, 0.45), 0 8px 20px rgba(10, 18, 35, 0.4);
+}
+
+.nav__brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.nav__brand-text span:last-child {
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 420px) {
+  .nav__avatar {
+    width: 34px;
+    height: 34px;
+  }
+
+  .nav__brand {
+    font-size: 0.875rem;
+    gap: 0.5rem;
+  }
+
+  /* La photo prend de la place : la baseline reste sur une seule ligne. */
+  .nav__brand-text span:last-child {
+    font-size: 0.6875rem;
+    white-space: nowrap;
+  }
+}
+
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav__link {
+  display: none;
+  padding: 0.5rem 0.875rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  border-radius: 999px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.nav__link:hover {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+@media (min-width: 880px) {
+  .nav__link {
+    display: inline-block;
+  }
+}
+
+.nav__cta {
+  min-height: 44px;
+  padding: 0.55rem 1.1rem;
+  font-size: 0.9375rem;
+}
+
+/* -----------------------------------------------------------------------------
+   7. SOUND TOGGLE
+   -------------------------------------------------------------------------- */
+.sound-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* Zone tactile >= 44x44 même si l'icône ne fait que 20x30 */
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.75);
+  transition: color 0.25s ease, background-color 0.25s ease;
+}
+
+.sound-toggle:hover {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.sound-toggle[aria-pressed="true"] {
+  color: #8fa3ff;
+}
+
+.sound-toggle__svg {
+  width: 20px;
+  height: 30px;
+  overflow: visible;
+}
+
+/* -----------------------------------------------------------------------------
+   8. HERO + SCÈNE PHYSIQUE
+   -------------------------------------------------------------------------- */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  background: var(--navy);
+  color: var(--white);
+  overflow: hidden;
+  /* Padding bas généreux : le contenu remonte et la pile de badges
+     dispose de sa propre bande, sans jamais empiéter sur la lecture. */
+  padding-block: 7rem clamp(10rem, 26vh, 17rem);
+}
+
+/* Halo discret, pas de dégradé violet générique */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -25%;
+  left: 50%;
+  width: min(1100px, 130%);
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    circle,
+    rgba(43, 75, 255, 0.22) 0%,
+    rgba(43, 75, 255, 0) 62%
+  );
+  pointer-events: none;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 3; /* Toujours au-dessus des badges */
+  width: 100%;
+  /* Promotion explicite en couche composite.
+     Sans ça, les badges (will-change: transform) sont promus par le compositeur
+     et peuvent être peints AU-DESSUS du texte malgré un z-index inférieur.
+     Le titre, le sous-titre et les CTA doivent rester lisibles quoi qu'il arrive. */
+  transform: translateZ(0);
+}
+
+.hero__content {
+  max-width: 56rem;
+}
+
+.hero__rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.hero__rating strong {
+  color: var(--white);
+  font-weight: 600;
+}
+
+.hero__stars {
+  display: inline-flex;
+  gap: 2px;
+  color: #ffb020;
+}
+
+.hero__title {
+  margin-bottom: 1.5rem;
+  max-width: 22ch;
+}
+
+.hero__title em {
+  font-style: normal;
+  color: #8fa3ff;
+}
+
+.hero__sub {
+  max-width: 46rem;
+  font-size: clamp(1.0625rem, 1.6vw, 1.3125rem);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 1.25rem;
+}
+
+.hero__proof {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5rem 1rem 0.5rem 0.75rem;
+  margin-bottom: 2.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  /* Fond OPAQUE : un badge blanc qui passe derrière ne doit jamais
+     transparaître et annuler le contraste du texte. */
+  background: rgba(20, 33, 56, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.hero__dot {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: 50%;
+  background: #3ddc84;
+  box-shadow: 0 0 0 4px rgba(61, 220, 132, 0.18);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.875rem;
+  position: relative;
+  z-index: 4;
+}
+
+.hero__scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 1.5rem;
+  transform: translateX(-50%);
+  z-index: 3;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+}
+
+/* Mobile : hero compacté pour que la pile de badges reste proche de la
+   ligne de flottaison. La majorité des prospects arrivent depuis WhatsApp. */
+@media (max-width: 640px) {
+  .hero {
+    min-height: auto;
+    padding-block: 5.5rem clamp(6.5rem, 17vh, 9rem);
+  }
+
+  .hero__rating {
+    font-size: 0.8125rem;
+    gap: 0.5rem;
+    margin-bottom: 1.125rem;
+    align-items: flex-start; /* les étoiles restent alignées sur la 1re ligne */
+  }
+
+  .hero__stars {
+    margin-top: 0.2rem;
+  }
+
+  .hero__title {
+    margin-bottom: 1.125rem;
+  }
+
+  .hero__sub {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero__proof {
+    font-size: 0.8125rem;
+    margin-bottom: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .hero__proof .hero__dot {
+    margin-top: 0.45rem;
+  }
+
+  .hero__actions {
+    width: 100%;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* --- Couche physique --- */
+.physics-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 2; /* Sous le texte du hero */
+  pointer-events: none; /* Seuls les badges captent le pointeur */
+  overflow: hidden;
+}
+
+.tool-badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  /* Largeur variable selon le nom, bornée pour garder une pile homogène */
+  min-width: 120px;
+  max-width: 180px;
+  padding: 0.625rem 0.9375rem;
+  background: var(--white);
+  border: 1px solid var(--surface);
+  border-radius: 12px;
+  box-shadow: var(--shadow-badge);
+  color: var(--navy);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  will-change: transform;
+  transform: translate3d(-999px, -999px, 0);
+  backface-visibility: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Pointeur actif uniquement sur les badges (drag / hover) */
+.physics-layer.is-interactive .tool-badge {
+  pointer-events: auto;
+  cursor: grab;
+}
+
+.physics-layer.is-interactive .tool-badge:active {
+  cursor: grabbing;
+}
+
+.tool-badge[hidden] {
+  display: none !important;
+}
+
+.tool-badge__mark {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  color: var(--electric);
+}
+
+/* Logos de marque réels (SVG inline, multicolores).
+   preserveAspectRatio par défaut : un logo large (n8n) reste centré dans sa
+   boîte sans jamais être déformé. currentColor sert de repli pour les logos
+   monochromes (OpenAI, ElevenLabs) : on force un noir profond, pas le navy. */
+.tool-badge__logo {
+  flex: none;
+  width: 22px;
+  height: 20px;
+  color: #0b0f17;
+}
+
+/* Palier mobile : badges compacts (90–110px) et moins nombreux */
+.physics-layer.is-compact .tool-badge {
+  min-width: 90px;
+  max-width: 112px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+  border-radius: 10px;
+}
+
+.physics-layer.is-compact .tool-badge__mark {
+  width: 14px;
+  height: 14px;
+}
+
+.physics-layer.is-compact .tool-badge__logo {
+  width: 17px;
+  height: 15px;
+}
+
+.physics-layer.is-compact .tool-badge__inner {
+  gap: 0.375rem;
+}
+
+/* Fallback sans JS : sous 768px on n'affiche que les 7 premiers badges */
+@media (max-width: 767px) {
+  .physics-layer.is-static .tool-badge:nth-child(n + 8) {
+    display: none;
+  }
+
+  .physics-layer.is-static .tool-badge {
+    min-width: 90px;
+    max-width: 112px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* Micro-interaction au survol : léger scale + ombre renforcée.
+   Appliqué sur un enfant pour ne pas écraser le transform piloté par la physique. */
+.tool-badge__inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: transform 0.18s ease;
+}
+
+.physics-layer.is-interactive .tool-badge:hover {
+  box-shadow: 0 2px 6px rgba(10, 18, 35, 0.2), 0 14px 34px rgba(10, 18, 35, 0.3);
+  border-color: #dfe5f5;
+}
+
+.physics-layer.is-interactive .tool-badge:hover .tool-badge__inner {
+  transform: scale(1.05);
+}
+
+/* --- Fallback statique : reduced-motion, échec de Matter.js, ou no-JS --- */
+.physics-layer.is-static {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 var(--gutter) clamp(1.5rem, 5vw, 3rem);
+}
+
+.physics-layer.is-static .physics-layer__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.625rem;
+  max-width: 60rem;
+}
+
+.physics-layer.is-static .tool-badge {
+  position: relative;
+  transform: none;
+  opacity: 0;
+  animation: badge-fade 0.5s ease forwards;
+}
+
+@keyframes badge-fade {
+  to {
+    opacity: 1;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   9. CHIFFRES
+   -------------------------------------------------------------------------- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+@media (min-width: 900px) {
+  .stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.stat {
+  background: var(--white);
+  padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.125rem, 2.5vw, 2rem);
+}
+
+.stat__value {
+  display: block;
+  font-size: clamp(2.75rem, 6vw, 4.25rem);
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  color: var(--electric);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat__label {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  color: var(--grey);
+  max-width: 16ch;
+}
+
+/* -----------------------------------------------------------------------------
+   10. CARTES SYSTÈMES
+   -------------------------------------------------------------------------- */
+.cases {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 720px) {
+  .cases {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1060px) {
+  .cases {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.case {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.375rem, 2.5vw, 1.875rem);
+  transition: transform 0.25s ease, box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.case:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: #d5deef;
+}
+
+.case__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.case__title {
+  font-size: 1.1875rem;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--navy);
+}
+
+/* Badges PROD / POC : deux lectures visuelles franchement distinctes.
+   PROD = plein, vert, signal "ça tourne". POC = contour, gris, signal "prototype". */
+.tag {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.3125rem 0.625rem;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tag--prod {
+  background: #e7f8ef;
+  color: #0d7a43;
+  border: 1px solid #bfe9d3;
+}
+
+.tag--prod::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10a45a;
+}
+
+.tag--poc {
+  background: transparent;
+  color: var(--grey);
+  border: 1px dashed #c3cbdb;
+}
+
+.case__row {
+  margin-bottom: 0.875rem;
+}
+
+.case__label {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #98a2b3;
+  margin-bottom: 0.25rem;
+}
+
+.case__text {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.case__result {
+  margin-top: auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
+.case__result .case__label {
+  color: var(--electric);
+}
+
+.case__result p {
+  font-size: 1.0625rem;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--navy);
+}
+
+/* -----------------------------------------------------------------------------
+   11. OFFRES
+   -------------------------------------------------------------------------- */
+.offers {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 860px) {
+  .offers {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.offer {
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid transparent;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.offer:hover {
+  background: var(--white);
+  border-color: var(--line);
+  box-shadow: var(--shadow-sm);
+}
+
+.offer__num {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  color: var(--electric);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 1rem;
+}
+
+.offer h3 {
+  margin-bottom: 0.75rem;
+}
+
+.offer p {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--grey);
+}
+
+/* -----------------------------------------------------------------------------
+   12. MÉTHODE
+   -------------------------------------------------------------------------- */
+.steps {
+  display: grid;
+  gap: 1px;
+  background: var(--navy-border);
+  border-top: 1px solid var(--navy-border);
+}
+
+@media (min-width: 780px) {
+  .steps {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.step {
+  background: var(--navy);
+  padding: clamp(1.5rem, 3vw, 2.25rem) clamp(1.125rem, 2vw, 1.75rem);
+}
+
+.step__num {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: #8fa3ff;
+  margin-bottom: 1rem;
+}
+
+.step h3 {
+  margin-bottom: 0.625rem;
+}
+
+.step p {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+/* -----------------------------------------------------------------------------
+   13. STACK
+   -------------------------------------------------------------------------- */
+.stack {
+  display: grid;
+  gap: 2rem 3rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 700px) {
+  .stack {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.stack__group h3 {
+  padding-bottom: 0.875rem;
+  margin-bottom: 1.125rem;
+  border-bottom: 2px solid var(--electric);
+  display: inline-block;
+}
+
+.stack__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.stack__list li {
+  padding: 0.4375rem 0.8125rem;
+  background: var(--surface);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* -----------------------------------------------------------------------------
+   14. À PROPOS
+   -------------------------------------------------------------------------- */
+.about {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .about {
+    grid-template-columns: 0.85fr 1.15fr;
+  }
+}
+
+/* Portrait : cadré 4/5, calé sous le titre, jamais plus large que la colonne */
+.about__photo {
+  margin: 1.75rem 0 0;
+  max-width: 320px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-md);
+  background: var(--surface);
+}
+
+.about__photo img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 18%;
+}
+
+@media (max-width: 899px) {
+  .about__photo {
+    max-width: 260px;
+  }
+}
+
+.about__text p + p {
+  margin-top: 1.25rem;
+}
+
+.about__text p {
+  font-size: clamp(1rem, 1.4vw, 1.125rem);
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+.about__card {
+  padding: clamp(1.5rem, 3vw, 2rem);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+}
+
+.about__card dt {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #98a2b3;
+  margin-bottom: 0.25rem;
+}
+
+.about__card dd {
+  margin: 0 0 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.about__card dd:last-child {
+  margin-bottom: 0;
+}
+
+/* -----------------------------------------------------------------------------
+   15. CTA FINAL + FOOTER
+   -------------------------------------------------------------------------- */
+.cta {
+  text-align: center;
+}
+
+.cta .h2 {
+  max-width: 20ch;
+  margin-inline: auto;
+  margin-bottom: 1.25rem;
+}
+
+.cta .lead {
+  max-width: 40rem;
+  margin-inline: auto;
+  margin-bottom: 2.25rem;
+}
+
+.cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.875rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.cta__mail {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.82);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.cta__mail:hover {
+  color: var(--white);
+  border-color: var(--white);
+}
+
+.footer {
+  background: var(--navy-deep);
+  color: rgba(255, 255, 255, 0.7);
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+  font-size: 0.9375rem;
+}
+
+.footer__grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 760px) {
+  .footer__grid {
+    grid-template-columns: 1.2fr 1fr 1fr;
+  }
+}
+
+.footer__brand {
+  font-size: 1.125rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.footer h4 {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 0.875rem;
+}
+
+.footer a {
+  display: inline-block;
+  padding-block: 0.25rem;
+  transition: color 0.2s ease;
+}
+
+.footer a:hover {
+  color: var(--white);
+}
+
+.footer__bottom {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* -----------------------------------------------------------------------------
+   16. RÉVÉLATIONS AU SCROLL (fondus uniquement, jamais de délai de lecture)
+   -------------------------------------------------------------------------- */
+/* L'état masqué n'est appliqué QUE si JavaScript est disponible (classe .js
+   posée en tête de <head>). Sans JS, tout le contenu reste visible : une
+   section ne doit jamais dépendre d'un observer pour être lisible. */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* -----------------------------------------------------------------------------
+   17. PRÉFÉRENCE MOUVEMENT RÉDUIT — non négociable
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .js .reveal,
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .physics-layer.is-static .tool-badge {
+    opacity: 1;
+    animation: none;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   18. DÉMO ANIMÉE — "un agent au travail"
+   Une scène SVG animée 100 % CSS, montée comme une vidéo (cadre + barre de
+   lecture + pause). Zéro fichier vidéo : rien à télécharger, net à toutes les
+   tailles, et la boucle s'arrête dès que la section sort de l'écran.
+
+   HORLOGE UNIQUE : tous les éléments partagent la même durée (--demo-dur = 9s)
+   et se décalent uniquement par animation-delay. C'est ce qui garde la scène
+   synchronisée sans une ligne de JavaScript de timing.
+   -------------------------------------------------------------------------- */
+.demo {
+  --demo-dur: 9s;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--navy-deep);
+  box-shadow: var(--shadow-md);
+}
+
+.demo__stage {
+  position: relative;
+  background: var(--navy-deep);
+}
+
+.demo__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: var(--font);
+}
+
+/* --- Typographie de la scène --- */
+.demo__t1 {
+  fill: rgba(255, 255, 255, 0.95);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.demo__t2 {
+  fill: rgba(255, 255, 255, 0.5);
+  font-size: 10.5px;
+  font-weight: 500;
+}
+
+.demo__pill-txt {
+  fill: rgba(255, 255, 255, 0.75);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.demo__stack-txt {
+  fill: rgba(255, 255, 255, 0.35);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.demo__label {
+  fill: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+}
+
+.demo__foot {
+  fill: rgba(255, 255, 255, 0.32);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* --- Cartes --- */
+.demo__chip rect {
+  fill: rgba(255, 255, 255, 0.06);
+  stroke: rgba(255, 255, 255, 0.12);
+}
+
+.demo__glyph {
+  fill: #fff;
+}
+
+/* --- Câbles --- */
+.demo__wire {
+  stroke: rgba(255, 255, 255, 0.14);
+  stroke-width: 1.5;
+}
+
+.demo__flow {
+  stroke: #6f86ff;
+  stroke-width: 2;
+  stroke-dasharray: 3 9;
+  opacity: 0.5;
+  animation: demo-flow 1.1s linear infinite;
+}
+
+@keyframes demo-flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+/* --- Cœur de l'agent --- */
+.demo__core {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: demo-breathe 2.6s ease-in-out infinite;
+}
+
+@keyframes demo-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.045);
+  }
+}
+
+.demo__ring {
+  fill: none;
+  stroke: #6f86ff;
+  stroke-width: 1.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: demo-ring 2.6s ease-out infinite;
+}
+
+.demo__ring--2 {
+  animation-delay: 1.3s;
+}
+
+@keyframes demo-ring {
+  0% {
+    transform: scale(0.72);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.12);
+    opacity: 0;
+  }
+}
+
+/* --- Points "l'agent réfléchit" : visibles uniquement pendant le traitement --- */
+.demo__think {
+  opacity: 0;
+  animation: demo-think var(--demo-dur) linear infinite;
+  animation-delay: 1.6s;
+}
+
+@keyframes demo-think {
+  0% {
+    opacity: 0;
+  }
+  3% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 1;
+  }
+  24% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.demo__dot {
+  fill: #8ea1ff;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: demo-bounce 0.9s ease-in-out infinite;
+}
+
+.demo__dot--2 {
+  animation-delay: 0.15s;
+}
+
+.demo__dot--3 {
+  animation-delay: 0.3s;
+}
+
+@keyframes demo-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-5px);
+    opacity: 1;
+  }
+}
+
+/* --- Entrées : la carte s'allume au moment où elle émet --- */
+.demo__chip--s1,
+.demo__chip--s2,
+.demo__chip--s3 {
+  animation: demo-fire var(--demo-dur) linear infinite;
+}
+
+.demo__chip--s1 {
+  animation-delay: 0.2s;
+}
+.demo__chip--s2 {
+  animation-delay: 0.6s;
+}
+.demo__chip--s3 {
+  animation-delay: 1s;
+}
+
+@keyframes demo-fire {
+  0% {
+    opacity: 0.42;
+  }
+  3% {
+    opacity: 1;
+  }
+  26% {
+    opacity: 1;
+  }
+  36% {
+    opacity: 0.42;
+  }
+  100% {
+    opacity: 0.42;
+  }
+}
+
+/* --- Sorties : la carte s'allume quand l'action est faite --- */
+.demo__chip--o1,
+.demo__chip--o2,
+.demo__chip--o3 {
+  animation: demo-done var(--demo-dur) linear infinite;
+}
+
+.demo__chip--o1 {
+  animation-delay: 4.7s;
+}
+.demo__chip--o2 {
+  animation-delay: 5.1s;
+}
+.demo__chip--o3 {
+  animation-delay: 5.5s;
+}
+
+@keyframes demo-done {
+  0% {
+    opacity: 0.32;
+  }
+  4% {
+    opacity: 1;
+  }
+  45% {
+    opacity: 1;
+  }
+  55% {
+    opacity: 0.32;
+  }
+  100% {
+    opacity: 0.32;
+  }
+}
+
+.demo__check {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: demo-check var(--demo-dur) linear infinite;
+}
+
+.demo__chip--o1 .demo__check {
+  animation-delay: 4.8s;
+}
+.demo__chip--o2 .demo__check {
+  animation-delay: 5.2s;
+}
+.demo__chip--o3 .demo__check {
+  animation-delay: 5.6s;
+}
+
+@keyframes demo-check {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  3% {
+    opacity: 1;
+    transform: scale(1.18);
+  }
+  6% {
+    transform: scale(1);
+  }
+  46% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  54% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+}
+
+/* --- Paquets de données : activés seulement si offset-path est supporté --- */
+.demo__pk {
+  fill: #9db0ff;
+  opacity: 0;
+  transform-box: fill-box;
+  offset-rotate: 0deg;
+  offset-distance: 0%;
+}
+
+/* Longhands volontaires : le raccourci `animation` réinitialiserait le
+   animation-delay propre à chaque paquet (il est déclaré plus bas, avec une
+   spécificité plus faible) et les six partiraient tous en même temps. */
+.has-motion-path .demo__pk {
+  animation-name: demo-packet;
+  animation-duration: var(--demo-dur);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.demo__pk--1 {
+  offset-path: path("M212 75C248 75 244 180 274 180");
+  animation-delay: 0.5s;
+}
+.demo__pk--2 {
+  offset-path: path("M212 180H274");
+  animation-delay: 0.9s;
+}
+.demo__pk--3 {
+  offset-path: path("M212 285C248 285 244 180 274 180");
+  animation-delay: 1.3s;
+}
+.demo__pk--4 {
+  offset-path: path("M366 180C396 180 392 75 428 75");
+  animation-delay: 3.5s;
+  fill: #7ee2a8;
+}
+.demo__pk--5 {
+  offset-path: path("M366 180H428");
+  animation-delay: 3.9s;
+  fill: #7ee2a8;
+}
+.demo__pk--6 {
+  offset-path: path("M366 180C396 180 392 285 428 285");
+  animation-delay: 4.3s;
+  fill: #7ee2a8;
+}
+
+@keyframes demo-packet {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+  2% {
+    opacity: 1;
+  }
+  12% {
+    offset-distance: 100%;
+    opacity: 1;
+  }
+  14% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+
+/* --- Pastille "en direct" --- */
+.demo__rec {
+  animation: demo-rec 1.4s ease-in-out infinite;
+}
+
+@keyframes demo-rec {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/* --- Barre de lecture --- */
+.demo__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 0.75rem clamp(0.875rem, 2vw, 1.25rem);
+  background: rgba(255, 255, 255, 0.04);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.demo__play {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--white);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.demo__play:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: scale(1.05);
+}
+
+.demo__play svg {
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
+  grid-area: 1 / 1;
+}
+
+.demo__icon-play {
+  display: none;
+}
+
+.demo.is-paused .demo__icon-play {
+  display: block;
+}
+
+.demo.is-paused .demo__icon-pause {
+  display: none;
+}
+
+.demo__track {
+  flex: 1;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.demo__fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--electric), #7e91ff);
+  animation: demo-progress var(--demo-dur) linear infinite;
+}
+
+@keyframes demo-progress {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.demo__time {
+  flex: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* Pause manuelle OU section hors écran : plus une seule frame calculée. */
+.demo.is-paused .demo__svg *,
+.demo.is-paused .demo__fill,
+.demo.is-idle .demo__svg *,
+.demo.is-idle .demo__fill {
+  animation-play-state: paused;
+}
+
+@media (max-width: 600px) {
+  .demo__t1 {
+    font-size: 14.5px;
+  }
+  .demo__t2 {
+    font-size: 11.5px;
+  }
+  .demo__foot,
+  .demo__stack-txt {
+    display: none;
+  }
+}
+
+/* Mouvement réduit : la scène devient une infographie fixe et complète. */
+@media (prefers-reduced-motion: reduce) {
+  .demo__svg *,
+  .demo__fill {
+    animation: none !important;
+  }
+
+  .demo__chip,
+  .demo__check,
+  .demo__think {
+    opacity: 1 !important;
+  }
+
+  .demo__pk {
+    opacity: 0 !important;
+  }
+
+  .demo__fill {
+    width: 100%;
+  }
+}
